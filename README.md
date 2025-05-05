@@ -14,14 +14,14 @@ This repository contains a collection of data analysis projects. Each subfolder 
 - **Instructions:** See the README in the [01 Market Basket Analysis folder](./01%20Market%20Basket%20Analysis/README.md) for more details on setup and execution.
 
 ### Other Projects
-- **Project 02:** Financial Forecasting Analysis  
-  _Description: Analyzes historical financial data to forecast future trends. (Documentation coming soon.)_
+- **Project 02:** Customer Lifetime Value (CLV) Analysis  
+  _Description: Calculates and predicts customer value over time, helping companies identify high-value customers and tailor their marketing strategies._
 
-- **Project 03:** Customer Segmentation Analysis  
-  _Description: Uses clustering methods to identify distinct customer segments. (Documentation coming soon.)_
+- **Project 03:** Geographical Sales Performance Dashboard  
+  _Description: Provides a detailed visual analysis of sales data by region, enabling the identification of market trends and growth opportunities._
 
-- **Project 04:** Social Media Sentiment Analysis  
-  _Description: Processes social media data to gauge public sentiment on key topics. (Documentation coming soon.)_
+- **Project 04:** Social Media Campaign Analysis  
+  _Description: Examines social media engagement and sentiment to evaluate campaign performance and inform future digital marketing efforts._
 
 *Additional projects will be added over time.*
 
