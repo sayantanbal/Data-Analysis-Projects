@@ -44,9 +44,15 @@ The analysis is organized into the following sections:
 - Examined revenue patterns by day of week and identified peak shopping periods
 - **Heatmap Analysis:** A detailed heatmap visualization of hourly patterns by day of week was generated. The heatmap provides insights into peak sales hours, enabling targeted promotions and improved resource allocation.
 
-### 5. Association Analysis (Future Component)
-- Planned analysis to uncover product associations (market basket analysis)
-- Future work will include metrics such as support, confidence, and lift to gauge product relationships
+### 5. Association Analysis
+- Implemented market basket analysis to identify product combinations frequently purchased together
+- Calculated association rule metrics for product pairs:
+  - **Support:** Percentage of transactions containing both products
+  - **Confidence:** Probability of buying product B when buying product A
+  - **Lift:** How much more likely products appear together than by random chance
+- Visualized the strongest product associations using horizontal bar charts
+- Identified high-lift product pairs for potential cross-selling opportunities
+- Ranked associations by different metrics to provide multiple business perspectives
 
 ## Methodology
 1. **Data Preprocessing**
@@ -65,11 +71,18 @@ The analysis is organized into the following sections:
    - Implemented a heatmap for detailed hourly transaction pattern analysis
    - Employed seasonal grouping and box plots to highlight trends and anomalies
 
+4. **Association Rule Mining**
+   - Grouped products by transaction
+   - Generated product pairs using combinations
+   - Calculated standard association metrics (support, confidence, lift)
+   - Prioritized associations by different business-relevant metrics
+
 ## Key Findings
 - **Temporal Trends:** Weekdays generally demonstrate stronger sales, with Thursday and Tuesday recording the highest revenue.
 - **Hourly Patterns:** Clear peaks during business hours were observed in the heatmap, offering opportunities for targeted promotional efforts during off-peak periods.
 - **Geographical Variation:** There are significant differences in transaction volume and average transaction value across countries.
 - **Product Impact:** A small selection of products contributes disproportionately to total revenue.
+- **Product Associations:** Strong associations were discovered between complementary products, providing clear opportunities for cross-selling and store layout optimization.
 - **Data Quality:** Some challenges with missing data and outliers were identified, and various cleaning methods were successfully applied.
 
 ## Technologies Used
@@ -78,6 +91,8 @@ The analysis is organized into the following sections:
 - matplotlib and seaborn for data visualization
 - NumPy for numerical operations
 - dateutil for date management
+- collections.Counter for efficient frequency counting
+- itertools.combinations for association analysis
 
 ## How to Run the Project
 1. **Clone the Repository**
