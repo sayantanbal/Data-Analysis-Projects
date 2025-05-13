@@ -56,7 +56,7 @@ This repository contains a collection of data analysis projects. Each subfolder 
 ```plaintext
 Data-Analysis-Projects/
 ├── 01 Market Basket Analysis/
-│   ├── main.py
+│   ├── main.ipynb
 │   ├── README.md
 │   └── ...other project files...
 ├── 02 Financial Forecasting Analysis/  *(future project)*
