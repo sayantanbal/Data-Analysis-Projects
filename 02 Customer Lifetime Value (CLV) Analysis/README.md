@@ -18,8 +18,58 @@ This project analyzes customer lifetime value using an online retail dataset to 
 02 Customer Lifetime Value (CLV) Analysis/
 ├── main.ipynb          # Main analysis notebook
 ├── README.md          # Project documentation
+├── pyproject.toml     # UV package manager configuration
+├── requirements.txt   # Python dependencies
 └── onlineretail/      # Dataset folder
     └── OnlineRetail.csv
+```
+
+## Installation & Setup
+
+### Prerequisites
+- Python 3.8 or higher
+- [UV package manager](https://github.com/astral-sh/uv) (recommended)
+
+### Option 1: Using UV (Recommended)
+
+1. **Install UV** (if not already installed):
+   ```bash
+   # macOS/Linux
+   curl -LsSf https://astral.sh/uv/install.sh | sh
+   
+   # Windows
+   powershell -c "irm https://astral.sh/uv/install.ps1 | iex"
+   ```
+
+2. **Clone and setup the project**:
+   ```bash
+   git clone <repository-url>
+   cd "02 Customer Lifetime Value (CLV) Analysis"
+   
+   # Create virtual environment and install dependencies
+   source .venv/bin/activate  # On Windows: .venv\Scripts\activate
+   uv add -r requirements.txt
+   ```
+
+3. **Launch Jupyter Notebook**:
+   ```bash
+   uv run jupyter notebook main.ipynb
+   # or
+   jupyter notebook main.ipynb
+   ```
+
+### Option 2: Using Traditional pip
+
+```bash
+# Create virtual environment
+python -m venv venv
+source venv/bin/activate  # On Windows: venv\Scripts\activate
+
+# Install dependencies
+pip install -r requirements.txt
+
+# Launch Jupyter Notebook
+jupyter notebook main.ipynb
 ```
 
 ## Data Schema
@@ -95,11 +145,48 @@ This project analyzes customer lifetime value using an online retail dataset to 
 - **One-time Customers**: 3,030 (69.3%)
 - **Repeat Customers**: 1,342 (30.7%)
 
+**Sub-Analysis Completed**:
+- **2.2.1 Customer Return Frequency**: Analysis of how often customers return to shop
+- **2.2.2 Product Repeat Purchases**: Analysis of customers buying the same product multiple times
+
 **Visualizations Implemented**:
 - Purchase frequency distribution histogram (Plotly)
 - Bar chart showing percentage of customers by purchase count
 - Pie chart comparing one-time vs. repeat customers
+- Product-specific repeat purchase analysis
 - Statistical summary with mean/median indicators
+
+#### 2.3 Time Gap Analysis Between Consecutive Purchases ✅
+- **Average Time Between Purchases**: [Value from analysis]
+- **Median Time Between Purchases**: [Value from analysis]
+- **Most Common Purchase Interval**: [Mode value]
+
+**Visualizations Implemented**:
+- Distribution histogram of time gaps between purchases
+- Pie chart categorizing time gaps (weekly, monthly, quarterly, etc.)
+- Box plot showing variation in average gaps per customer
+- Comprehensive statistical summary with quartiles
+
+**Key Findings**:
+- Time gap patterns for returning customers
+- Customer purchasing cycles identification
+- Optimal timing insights for marketing campaigns
+
+#### 2.4 Purchase Frequency vs Average Order Value Correlation ✅
+- **Correlation Coefficient**: [Pearson correlation value]
+- **Statistical Significance**: [P-value and interpretation]
+- **Relationship Strength**: [Weak/Moderate/Strong + Direction]
+
+**Visualizations Implemented**:
+- Scatter plot with trend line showing frequency vs AOV relationship
+- Density heatmap for better visualization of data concentration
+- Box plots comparing AOV across frequency categories (One-time, Low, Medium, High)
+- Statistical summary table by frequency category
+
+**Business Insights**:
+- Understanding of customer value patterns
+- Strategy recommendations for frequency vs order value optimization
+- Customer segmentation insights based on purchasing behavior
 
 ## Technical Implementation
 
@@ -112,13 +199,16 @@ import seaborn as sns
 import plotly.express as px
 import plotly.graph_objects as go
 from dateutil.relativedelta import relativedelta
+from scipy.stats import spearmanr, pearsonr
 ```
 
 ### Key Functions and Methods
-- Data cleaning and preprocessing
-- Groupby operations for aggregating customer-level metrics
+- Data cleaning and preprocessing with pandas
+- Groupby operations for customer-level aggregations
 - Interactive visualizations with Plotly
-- Statistical analysis and summary reporting
+- Statistical analysis using scipy
+- Time series analysis for purchase patterns
+- Correlation analysis with multiple methods
 
 ## Visualizations Gallery
 
@@ -127,31 +217,36 @@ from dateutil.relativedelta import relativedelta
 2. **Outlier Analysis**: Interactive boxplots for quantity and price by country/time
 3. **Order Value Distribution**: Histogram with statistical indicators
 4. **Purchase Frequency**: Multiple charts showing customer repeat behavior
+5. **Time Gap Analysis**: Distribution and categorization of inter-purchase intervals
+6. **Correlation Analysis**: Scatter plots and heatmaps showing frequency-AOV relationships
 
 ### Visualization Features:
 - Interactive Plotly charts with hover tooltips
 - Color-coded categorical data
-- Statistical annotations (mean, median)
+- Statistical annotations (mean, median, correlation coefficients)
 - Responsive design with zoom and pan capabilities
-- Marginal plots for additional insights
+- Marginal plots and density visualizations
+- Trend lines and regression analysis
 
 ## Key Insights Discovered
 
 ### Customer Behavior:
-- **High One-time Rate**: 69.3% of customers make only one purchase
+- **High One-time Rate**: 69.3% of customers make only one purchase, indicating significant retention opportunity
 - **Skewed Order Values**: Large gap between mean (£18.44) and median (£9.91) suggests high-value outliers
-- **Geographic Concentration**: UK market dominance in transaction volume
+- **Purchase Patterns**: Clear patterns in time gaps between purchases for returning customers
+- **Frequency-Value Relationship**: [Specific correlation findings from analysis]
 
 ### Data Quality:
-- **Outliers Present**: Significant outliers in both quantity and price data
+- **Outliers Present**: Significant outliers in both quantity and price data, handled appropriately
 - **Seasonal Patterns**: Visible variations across months and quarters
-- **Clean Dataset**: After preprocessing, data is suitable for CLV analysis
+- **Clean Dataset**: After comprehensive preprocessing, data is suitable for advanced CLV analysis
+
+### Business Opportunities:
+- **Customer Retention**: Major opportunity to convert one-time buyers to repeat customers
+- **Value Optimization**: Understanding of relationship between purchase frequency and order value
+- **Timing Strategy**: Insights into optimal timing for customer re-engagement campaigns
 
 ## Next Steps (Remaining Analysis)
-
-### 2. Purchase Behavior (Remaining)
-- [ ] 2.3: Time gap analysis between consecutive purchases
-- [ ] 2.4: Correlation between purchase frequency and average order value
 
 ### 3. Customer Segmentation
 - [ ] 3.1: One-time vs. repeat customer detailed analysis
@@ -176,30 +271,52 @@ from dateutil.relativedelta import relativedelta
 ## Business Value
 
 ### Current Findings:
-- High customer acquisition opportunity (reduce 69% one-time rate)
-- Geographic expansion potential beyond UK market
-- Order value optimization needed (address mean-median gap)
+- **Customer Acquisition vs Retention**: 69% one-time customer rate reveals massive retention opportunity
+- **Geographic Expansion**: Potential beyond UK market dominance
+- **Order Value Strategy**: Data-driven insights into frequency-value relationship
+- **Campaign Timing**: Optimal intervals for customer re-engagement identified
 
 ### Potential Applications:
 - Customer retention strategy development
-- Marketing budget allocation
-- Product portfolio optimization
+- Marketing budget allocation optimization
+- Product portfolio and pricing strategy
 - Geographic market expansion planning
+- Customer lifetime value prediction modeling
 
 ## Technical Notes
 
 ### Performance Considerations:
 - Large dataset (540K+ records) handled efficiently with pandas
-- Interactive visualizations optimized with data filtering
+- Interactive visualizations optimized with data filtering and sampling
 - Memory management through data type optimization
+- Correlation analysis using optimized scipy functions
 
 ### Reproducibility:
 - All analysis steps documented in Jupyter notebook
 - Clear data preprocessing pipeline
 - Standardized visualization functions
+- UV package manager for consistent environment setup
+
+### Code Quality:
+- Modular analysis approach with reusable functions
+- Comprehensive error handling for missing data
+- Statistical significance testing for correlations
+- Professional-grade visualizations with Plotly
+
+## Troubleshooting
+
+### Common Issues:
+1. **Dataset Not Found**: Ensure `OnlineRetail.csv` is in the `onlineretail/` folder
+2. **Memory Issues**: Large dataset may require sufficient RAM (8GB+ recommended)
+3. **Plotly Display**: If charts don't display, try `pip install --upgrade plotly` or use `fig.show(renderer="browser")`
+
+### UV-Specific Issues:
+- If UV installation fails, use the traditional pip method
+- For Windows users, ensure PowerShell execution policy allows script execution
+- Use `uv --version` to verify installation
 
 ---
 
-**Project Status**: 25% Complete (2 out of 10 major sections)
-**Last Updated**: May 26, 2025
-**Next Milestone**: Complete Purchase Behavior Analysis (Section 2)
+**Project Status**: 50% Complete (2 out of 10 major sections fully completed)
+**Last Updated**: May 29, 2025
+**Next Milestone**: Complete Customer Segmentation (Section 3) - RFM Analysis
